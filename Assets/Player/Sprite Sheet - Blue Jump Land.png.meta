@@ -66,7 +66,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 40
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -90,7 +90,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -248,7 +248,13 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Sprite Sheet - Blue Jump Land_0: 338925204363467817
+      Sprite Sheet - Blue Jump Land_1: 3925259120093280991
+      Sprite Sheet - Blue Jump Land_2: 5393584417025584328
+      Sprite Sheet - Blue Jump Land_3: -1995427631654221939
+      Sprite Sheet - Blue Jump Land_4: 364018901862485122
+      Sprite Sheet - Blue Jump Land_5: 2045135016631717607
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
