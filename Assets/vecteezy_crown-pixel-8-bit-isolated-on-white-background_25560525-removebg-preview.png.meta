@@ -128,7 +128,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      vecteezy_crown-pixel-8-bit-isolated-on-white-background_25560525-removebg-preview_0: -5352174201239637189
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
