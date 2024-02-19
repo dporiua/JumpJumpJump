@@ -128,7 +128,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Sprite Sheet - Blue Jump Up_0: 5558946131993801517
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
