@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
@@ -12,10 +13,12 @@ public class PlayerController : MonoBehaviour {
     private bool onCircularPlatform = false;
     private bool onNormalPlatform = false;
     private bool swingDirection = true; // true for swinging to the right, false for left
+    public Animator slimeAnimation;
 
     void Start() {
         rb = GetComponent<Rigidbody2D>();
         arrow.SetActive(false);
+        slimeAnimation = GetComponent<Animator>();
     }
 
     void Update() {
@@ -23,8 +26,9 @@ public class PlayerController : MonoBehaviour {
             StartArrowSwing();
         }
 
-        if (Input.GetKeyUp(KeyCode.Space) && (onNormalPlatform || onCircularPlatform)) {
-            PerformJump();
+      if (Input.GetKeyUp(KeyCode.Space) && (onNormalPlatform || onCircularPlatform)) 
+        {
+           PerformJump();
         }
 
         if (isSwinging) {
@@ -34,10 +38,12 @@ public class PlayerController : MonoBehaviour {
 
     void StartArrowSwing() {
         if (!onCircularPlatform) { // Only swing the arrow if not on a circular platform
-            isSwinging = true;
+            isSwinging =  true;
             arrow.SetActive(true);
             angle = 90f; // Reset to start from the middle
+           
         }
+        slimeAnimation.SetBool("Prepare", true);
     }
 
     void UpdateArrowSwing() {
@@ -61,7 +67,6 @@ public class PlayerController : MonoBehaviour {
     void PerformJump() {
         isSwinging = false;
         arrow.SetActive(false);
-
         Vector2 jumpDirection = Vector2.up;
 
         if (onCircularPlatform) {
@@ -75,12 +80,24 @@ public class PlayerController : MonoBehaviour {
         } else if (onNormalPlatform) {
             jumpDirection = (arrow.transform.position - transform.position).normalized;
         }
+        if(arrow.transform.position.x > 0)
+        {
+            slimeAnimation.SetBool("Prepare", false);
+            slimeAnimation.SetBool("Jumping Right", true);
+        }
+        if (arrow.transform.position.x < 0)
+        {
+            slimeAnimation.SetBool("Prepare", false);
+            slimeAnimation.SetBool("Jumping Left", true);
+        }
+
 
         rb.AddForce(jumpDirection * jumpForce, ForceMode2D.Impulse);
 
        
         onNormalPlatform = false;
     }
+
 
     void OnCollisionEnter2D(Collision2D collision) {
         if (collision.gameObject.CompareTag("CircularPlatform")) {
@@ -89,7 +106,11 @@ public class PlayerController : MonoBehaviour {
             rb.constraints = RigidbodyConstraints2D.FreezeAll; 
         } else if (collision.gameObject.CompareTag("NormalPlatform")) {
             onNormalPlatform = true;
+            rb.rotation = 0;
         }
+        slimeAnimation.SetBool("Jumping Right", false);
+        slimeAnimation.SetBool("Jumping Left", false);
+        slimeAnimation.SetTrigger("Landing");
     }
 
     void OnCollisionExit2D(Collision2D collision) {
@@ -100,6 +121,8 @@ public class PlayerController : MonoBehaviour {
             rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         } else if (collision.gameObject.CompareTag("NormalPlatform")) {
             onNormalPlatform = false;
+            rb.rotation = 0;
         }
+
     }
 }
